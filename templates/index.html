@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 {% block title %}Flasky - Index{% endblock %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block page_content %}
 <div class="page-header">
-    <h1>Hello Abdullah!</h1>
+    <h1>Hello {% if name %}, {{ name }}{% else %}Stranger {% endif %}!</h1>
 </div>
-<div class="local-time">
+<!-- <div class="local-time">
     <p>The local date and time is: {{  moment(current_time).format('LLLL') }}</p>
-    <p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+    <p>That was {{ moment(current_time).fromNow(refresh=True) }}</p> -->
+
+<div class="page-container">
+    <h1>{% if name %}
+        {% if email and 'utoronto' in email %}
+        {{ name }}, your UofT email is {{ email }}.
+        {% else %}
+        Please enter a valid UofT Email Address.
+        {% endif %}
+        {% endif %}
+    </h1>
 </div>
+{{ wtf.quick_form(form) }}
+
 {% endblock %}
